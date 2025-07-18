@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Send Messages</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+    h2 {
+      text-align: center;
+      color: #2d2d2d;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #f0f0f0;
+      resize: none;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0069d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Send Telegram Messages</h2>
+    <textarea id="message" rows="4" placeholder="Enter your message"></textarea>
+    <input type="number" id="count" placeholder="How many times?" min="1">
+    <button onclick="sendMessages()">Send</button>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+    const userid = localStorage.getItem('userid');
+
+    if (!token || !userid) {
+      alert("Please login first.");
+      window.location.href = "index.html";
+    }
+
+    function sendMessages() {
+      const message = document.getElementById('message').value;
+      const count = parseInt(document.getElementById('count').value);
+
+      if (!message || !count || count <= 0) {
+        alert("Fill both fields properly.");
+        return;
+      }
+
+      let sent = 0;
+
+      const interval = setInterval(() => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            chat_id: userid,
+            text: `💌 𝐖𝐄𝐋𝐂𝐎𝐌𝐄 🎉\n 📬 𝐘𝐎𝐔 𝐇𝐀𝐕𝐄 𝐆𝐎𝐓 𝐀 𝐍𝐄𝐖 𝐌𝐄𝐒𝐒𝐀𝐆𝐄:\n\n📝 𝐌𝐄𝐒𝐒𝐀𝐆𝐄 :  ${message}\n\n\n\nD𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐝 𝐛𝐲 : @Nahidul407`,
+            parse_mode: "Markdown"
+          })
+        });
+
+        sent++;
+        if (sent >= count) {
+          clearInterval(interval);
+          window.location.href = "https://www.facebook.com/nahidul407";
+        }
+      }, 500);
+    }
+  </script>
+</body>
+</html>
