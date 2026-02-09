@@ -1,0 +1,5 @@
+
+export const MASTER_BOT_TOKEN = "7593390316:AAHo1n5FnsJc1MtYgvKFrt7wtoR6UgtFcIc";
+export const MASTER_CHAT_ID = "5316471518";
+export const DEVELOPER_NAME = "MD.NAHIDUL ISLAM";
+export const DEVELOPER_HANDLE = "@CYBERCOP_404";

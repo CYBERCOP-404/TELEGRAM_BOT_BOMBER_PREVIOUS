@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeleSender Pro | Terminal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #050505;
+      color: #00ff41;
+      overflow-x: hidden;
+    }
+    
+    .hacking-bg {
+      background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                  url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    }
+
+    .terminal-border {
+      border: 1px solid rgba(0, 255, 65, 0.3);
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+    }
+
+    .glitch-text {
+      text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+    }
+
+    .scanline {
+      width: 100%;
+      height: 100px;
+      z-index: 99;
+      background: linear-gradient(0deg, rgba(0, 255, 65, 0) 0%, rgba(0, 255, 65, 0.1) 50%, rgba(0, 255, 65, 0) 100%);
+      opacity: 0.1;
+      position: absolute;
+      bottom: 100%;
+      animation: scanline 6s linear infinite;
+    }
+
+    @keyframes scanline {
+      0% { bottom: 100%; }
+      100% { bottom: -100px; }
+    }
+
+    input::placeholder {
+      color: rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    .glass-notif {
+      background: rgba(0, 255, 65, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 255, 65, 0.2);
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="hacking-bg relative min-h-screen">
+  <div class="scanline"></div>
+  <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
